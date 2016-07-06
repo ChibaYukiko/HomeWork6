@@ -37,6 +37,42 @@ def solve(cities):
         current_city = next_city
     sum_kyori += dist[current_city][last_city]
     print sum_kyori
+
+    found = False
+
+    solution = list(range(N))
+
+    while True:
+        found = False
+        for a in range(1,N):
+            #print "start a"
+            for b in range(a+2, N):
+                #print "start b"
+                kyori1 = dist[solution[a-1]][solution[a]]
+                kyori2 = dist[solution[b-1]][solution[b]]
+
+                kyori3 = dist[solution[a-1]][solution[b-1]]
+                kyori4 = dist[solution[a]][solution[b]]
+                
+                if (kyori1+kyori2) > (kyori3+kyori4):
+                    print "found!"
+                    solution[a:b] = solution[b-1:a-1:-1]
+                    print solution
+                    found = True
+                    break
+
+            if found:
+                print "break"
+                break
+        if not found:
+            break;
+
+    sum_kyori = 0
+    for i in range(N-1):
+        sum_kyori += dist[solution[i]][solution[i+1]]
+    sum_kyori += dist[solution[N-1]][solution[0]]
+    print sum_kyori
+    
     return solution
 
 
