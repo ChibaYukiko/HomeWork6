@@ -31,11 +31,29 @@ def solve(cities):
     def distance_from_current_city(to):
         return dist[current_city][to]
 
-    patern = [[1,2,3,4,0],[1,2,4,3,0],[1,3,2,4,0],[1,3,4,2,0],[1,4,2,3,0],[1,4,3,2,0],[2,1,3,4,0],[2,1,4,3,0],[2,3,1,4,0],[2,3,4,1,0],[2,4,1,3,0],[2,4,3,1,0],[3,1,2,4,0],[3,1,4,2,0],[3,2,1,4,0],[3,2,4,1,0],[3,4,1,2,0],[3,4,2,1,0],[4,1,2,3,0],[4,1,3,2,0],[4,2,1,3,0],[4,2,3,1,0],[4,3,1,2,0],[4,3,2,1,0]]
+    patern = []
 
-    for i in range(0,24):
+    def perm(head,rest):
+        if not rest:
+            head.append(0)
+            patern.append(head)
+        
+        for i in rest:
+            h = head[:]
+            h.append(i)
+            r = rest[:]
+            r.remove(i)
+            perm(h, r)
+
+    perm([],list(range(1,N)))
+
+    #print patern
+
+    Nkaizyo = math.factorial(N-1)
+
+    for i in range(0,Nkaizyo):
         #print "24 starts"
-        for j in range(0,5):
+        for j in range(0,N):
             #print "5 start"
             sum_kyori1 += distance_from_current_city(patern[i][j])
             current_city = patern[i][j]
