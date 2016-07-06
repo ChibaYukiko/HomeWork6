@@ -40,18 +40,23 @@ def solve(cities):
 
     found = False
 
-    solution = list(range(N))
+    #solution = list(range(N))
 
     while True:
         found = False
-        for a in range(1,N):
+        for a in range(0,N):
             #print "start a"
             for b in range(a+2, N):
+                if a == 0:
+                    a2 = N-1
+                else :
+                    a2 = a-1
+                    
                 #print "start b"
-                kyori1 = dist[solution[a-1]][solution[a]]
+                kyori1 = dist[solution[a2]][solution[a]]
                 kyori2 = dist[solution[b-1]][solution[b]]
 
-                kyori3 = dist[solution[a-1]][solution[b-1]]
+                kyori3 = dist[solution[a2]][solution[b-1]]
                 kyori4 = dist[solution[a]][solution[b]]
                 
                 if (kyori1+kyori2) > (kyori3+kyori4):
@@ -71,6 +76,7 @@ def solve(cities):
     for i in range(N-1):
         sum_kyori += dist[solution[i]][solution[i+1]]
     sum_kyori += dist[solution[N-1]][solution[0]]
+    print "ko-shin!"
     print sum_kyori
     
     return solution
